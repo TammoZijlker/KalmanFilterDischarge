@@ -28,4 +28,4 @@ echo 'executing: qsub -cwd -q normal-e3-c7 -V -pe distrib ' $Nodes '-N '${PWD##*
 export ODA_JAVAOPTS='-Xmx2048m'
 # $OPENDADIR/oda_run_tammo.sh SSKF.oda
 
-# qsub -cwd -q normal-e3-c7 -V -pe distrib $Nodes -N ${PWD##*/} $OPENDADIR/oda_run_tammo.sh $ODAFile
+qsub -cwd -q normal-e3-c7 -V -pe distrib $Nodes -N ${PWD##*/} $OPENDADIR/oda_run_tammo.sh $ODAFile
