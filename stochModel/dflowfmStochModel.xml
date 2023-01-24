@@ -17,7 +17,6 @@
             <vector id="s1"/>
          </state>
         <predictor>
-            <!-- <vector id="LE_971_6_R_LMW-H_Schoonhoven.waterlevel"/> -->
             <vector id="LE_971_6_R_LMW-H_Schoonhoven.waterlevel"/>
             <vector id="LE_947_1_R_LMW-H_Hagestein-beneden.waterlevel"/>
             <vector id="LE_950_00.waterlevel"/>

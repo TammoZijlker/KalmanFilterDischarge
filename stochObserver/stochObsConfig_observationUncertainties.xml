@@ -4,7 +4,7 @@
 	<probabilityDistributionFunction id="LE_971_6_R_LMW-H_Schoonhoven.waterlevel" isActive="true">
 		<normal mean="0" stdv="0.05" stdvIsFactor="false"/>
 	</probabilityDistributionFunction>
-	<probabilityDistributionFunction id="LE_947_1_R_LMW-H_Hagestein-beneden.waterlevel.waterlevel" isActive="true">
+	<probabilityDistributionFunction id="LE_947_1_R_LMW-H_Hagestein-beneden.waterlevel" isActive="true">
 		<normal mean="0" stdv="0.05" stdvIsFactor="false"/>
 	</probabilityDistributionFunction>
 	<probabilityDistributionFunction id="LE_950_00.waterlevel" isActive="true">
