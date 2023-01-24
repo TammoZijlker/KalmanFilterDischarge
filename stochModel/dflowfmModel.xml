@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blackBoxModelConfig xmlns="http://www.openda.org" 
+                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                     xsi:schemaLocation="http://www.openda.org http://schemas.openda.org/blackBoxModelConfig.xsd">
+    <!-- Specify wrapper configuration for which this model is defined -->
+    <wrapperConfig>
+        <file>dflowfmWrapper.xml</file>
+    </wrapperConfig>
+
+    <!-- Specify wrapper configuration for which this model is defined -->
+    <aliasValues>
+        <alias key="exedir" value="./bin"/> 
+        <alias key="instanceDir" value="../output/work"/>
+        <alias key="templateDir" value="./input_dflowfm"/>
+        <alias key="runid" value="RMM_VZM"/>
+        <alias key="outputdir" value="results"/>
+        <alias key="mdufile" value="RMM_VZM.mdu"/>
+        <alias key="hisfile" value="RMM_VZM_his.nc"/>
+        <alias key="averaged_hisfile" value="RMM_VZM_averaged_his.nc"/>
+        <alias key="mapfile" value="RMM_VZM_map.nc"/>
+        <alias key="rstfile" value="RMM_VZM_20180101_000000_rst.nc"/>
+        <alias key="dimrfile" value="dimrConfig.xml"/>
+    </aliasValues>
+
+    <timeInfoExchangeItems start="start_time" end="end_time"/>
+
+    <exchangeItems>
+        <vector id="start_time" ioObjectId="mdufile" elementId="start_time" />
+        <vector id="end_time" ioObjectId="mdufile" elementId="end_time" />
+        <vector id="s1" ioObjectId="rstfile" elementId="s1"/>
+        <vector id="allElementsFromIoObject" ioObjectId="bcfile"/>
+        <vector id="LE_971_6_R_LMW-H_Schoonhoven.waterlevel" ioObjectId="averaged_hisfile" elementId="LE_971_6_R_LMW-H_Schoonhoven.waterlevel"/>
+        <vector id="LE_947_1_R_LMW-H_Hagestein-beneden.waterlevel" ioObjectId="averaged_hisfile" elementId="LE_947_1_R_LMW-H_Hagestein-beneden.waterlevel"/>
+        <vector id="LE_950_00.waterlevel" ioObjectId="averaged_hisfile" elementId="LE_950_00.waterlevel"/>
+    </exchangeItems>
+
+<doCleanUp>false</doCleanUp>
+<restartInfo dirPrefix="RESTART_">
+    <modelStateFile>RMM_VZM_20180101_000000_rst.nc</modelStateFile>
+</restartInfo>            
+</blackBoxModelConfig>

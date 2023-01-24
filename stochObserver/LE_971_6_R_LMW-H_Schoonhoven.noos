@@ -1,0 +1,17 @@
+#------------------------------------------------------
+# Timeseries created with quickplot and editing
+# Observations generated with 'truth-model'
+#------------------------------------------------------
+# Location    : LE_971_6_R_LMW-H_Schoonhoven
+# Position    : (30000,250)
+# Source      : observed
+# Unit        : waterlevel
+# Analyse time:
+# Timezone    : UTC
+#-----------------------------------------------------
+201801011200       0.0
+201801021200       0.0
+201801031200       0.0
+201801041200       0.0
+201801051200       0.0
+201801061200       0.0

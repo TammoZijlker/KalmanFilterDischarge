@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openDaApplication  xmlns="http://www.openda.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openda.org http://schemas.openda.org/openDaApplication.xsd">
+	<stochObserver className="org.openda.observers.IoObjectStochObserver">
+		<workingDirectory>./stochObserver</workingDirectory>
+		<configFile>stochObsConfig_NC_file.xml</configFile>
+	</stochObserver>
+	<initialSeed type="specify" seedValue="0000" />
+	<stochModelFactory className="org.openda.blackbox.wrapper.BBStochModelFactory">
+		<workingDirectory>./stochModel</workingDirectory>
+		<configFile>dflowfmStochModel.xml</configFile>
+	</stochModelFactory>
+	<algorithm className="org.openda.algorithms.kalmanFilter.SequentialSimulation">
+		<workingDirectory>./algorithm</workingDirectory>
+		<configString>SequentialStochasticSimulation.xml</configString>
+	</algorithm>
+</openDaApplication>

@@ -1,0 +1,10 @@
+#Ignore netcdfs for his and map
+*_map.nc
+*_his.nc
+
+#Ignore output folder
+output/**
+Experiment_Outputs/**
+
+#Ignore openda logfile
+openda_logfile.txt

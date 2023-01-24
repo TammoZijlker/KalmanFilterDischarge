@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<noosObserver xmlns="http://www.openda.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openda.org http://schemas.openda.org/observation/noosObservations.xsd">
+	<!-- <timeSeries location="LE_971_6_R_LMW-H_Schoonhoven" status="use" standardDeviation="0.05">
+		LE_971_6_R_LMW-H_Schoonhoven.noos
+	</timeSeries> -->
+	<timeSeries location="Schoonhoven" status="use" standardDeviation="0.05">
+		Schoonhoven.noos
+	</timeSeries>
+</noosObserver>

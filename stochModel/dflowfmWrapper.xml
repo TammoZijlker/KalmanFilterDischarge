@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blackBoxWrapperConfig xmlns="http://www.openda.org"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://www.openda.org http://schemas.openda.org/blackBoxWrapperConfig.xsd">
+
+    <!-- declare all the used aliases, specify the prefix and suffix of an alias key in a variable  -->
+    <aliasDefinitions defaultKeyPrefix="%" defaultKeySuffix="%">
+        <alias key="exedir"/>
+        <alias key="instanceDir"/>
+        <alias key="templateDir"/>
+        <alias key="outputdir"/>
+        <alias key="runid"/>
+        <alias key="mdufile"/>
+        <alias key="mapfile"/>
+        <alias key="hisfile"/>
+        <alias key="averaged_hisfile"/>
+        <alias key="dimrfile"/>
+        <alias key="rstfile"/>
+    </aliasDefinitions>
+
+    <run>
+
+        <!-- for each model instance, the template directory will be cloned to create the instance directory -->
+        <initializeActionsUsingDirClone instanceDir="%instanceDir%%instanceNumber%/" templateDir="%templateDir%"/>
+
+        <computeActions>
+            <action workingDirectory="%instanceDir%" linuxExe="%exedir%/start_dimr.sh" windowsExe="%exedir%/start_dimr.bat">
+                <arg>%dimrfile%</arg>
+                <checkOutput file="%outputdir%/%hisfile%"/>
+                <checkOutput file="%outputdir%/%mapfile%"/>
+            </action>
+            <action workingDirectory="%instanceDir%" linuxExe="%exedir%/RunPython.sh">
+                <arg>../../stochModel/%exedir%/RunningAverage.py</arg>
+                <arg>--his_filename_input %outputdir%/%hisfile%</arg> <!-- hisfile to read -->
+                <arg>--his_filename_output %outputdir%/%averaged_hisfile%</arg> <!-- averaged hisfile to write -->
+                <arg>--variable waterlevel</arg> <!-- variable to average -->
+                <arg>--Rolling_Window_Time 1</arg> <!-- timewindow to average over -->
+                <arg>--Rolling_Window_Unit D</arg> <!-- unit of timewindow -->
+                <checkOutput file="%outputdir%/%averaged_hisfile%"/>
+            </action>
+            <action className="org.openda.model_dflowfm.DFlowFMRestartFilePostProcessor" workingDirectory="%instanceDir%">
+                <arg>runId=%runid%</arg>
+                <arg>sourceRestartFileSubDir=%outputdir%</arg>
+                <arg>targetRestartFileName=%rstfile%</arg>
+                <!-- <arg>targetRestartFileNamePostFix=20180101_000000_rst.nc</arg> -->
+                <arg>deleteOlderRstFiles=true</arg>
+            </action>
+            <action workingDirectory="%instanceDir%" linuxExe="%exedir%/RunPython.sh">
+                <arg>../../stochModel/%exedir%/Copy_Add_Timestamp.py</arg>
+                <arg>--his_filename_input %outputdir%/%hisfile%</arg> <!-- hisfile to read -->
+                <arg>--copy_folder %outputdir%/allhisfiles</arg> <!-- location to copy the hisfile to -->
+            </action>
+            <action workingDirectory="%instanceDir%" linuxExe="%exedir%/RunPython.sh">
+                <arg>../../stochModel/%exedir%/Copy_Add_Timestamp.py</arg>
+                <arg>--his_filename_input %outputdir%/%averaged_hisfile%</arg> <!-- hisfile to read -->
+                <arg>--copy_folder %outputdir%/allhisfiles</arg> <!-- location to copy the hisfile to -->
+            </action>
+        </computeActions>
+        <finalizeActions>
+            <action workingDirectory="%instanceDir%" linuxExe="%exedir%/RunPython.sh">
+                <arg>../../stochModel/%exedir%/Concatenate_Hisfiles.py</arg>
+                <arg>--input_files %outputdir%/allhisfiles/*%hisfile%</arg> <!-- hisfile to read -->
+                <arg>--output_filename %outputdir%/full_%hisfile%.nc</arg> <!-- location to copy the hisfile to -->
+            </action>
+            <action workingDirectory="%instanceDir%" linuxExe="%exedir%/RunPython.sh">
+                <arg>../../stochModel/%exedir%/Concatenate_Hisfiles.py</arg>
+                <arg>--input_files %outputdir%/allhisfiles/*%averaged_hisfile%</arg> <!-- hisfile to read -->
+                <arg>--output_filename %outputdir%/full_%averaged_hisfile%</arg> <!-- location to copy the hisfile to -->
+            </action>
+        </finalizeActions> 
+    </run>
+    <inputOutput>
+        <ioObject className="org.openda.model_dflowfm.DFlowFMTimeInfo">
+            <file>%mdufile%</file>
+            <id>mdufile</id>
+            <arg>useRstForRestart=true</arg>
+        </ioObject>
+        <ioObject className="org.openda.model_dflowfm.DFlowFMRestartFileWrapper">
+            <file>%rstfile%</file>
+            <id>rstfile</id>
+        </ioObject>
+        <ioObject className="org.openda.model_dflowfm.BcFile">
+            <file>discharge_noise_lek.bc</file>
+            <id>bcfile</id>
+            <arg>discharge_noise_lek.bc</arg>
+        </ioObject>	
+        <dataObject className="org.openda.exchange.dataobjects.NetcdfDataObject">
+            <file>%outputdir%/%averaged_hisfile%</file>
+            <id>averaged_hisfile</id>
+            <arg>true</arg>
+            <arg>false</arg>
+        </dataObject>
+        <!-- <dataObject className="org.openda.exchange.dataobjects.NetcdfDataObject">
+            <file>%outputdir%/%hisfile%</file>
+            <id>hisfile</id>
+            <arg>true</arg>
+            <arg>false</arg>
+        </dataObject> -->
+    </inputOutput>
+
+</blackBoxWrapperConfig>

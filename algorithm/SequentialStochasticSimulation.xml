@@ -1,0 +1,7 @@
+<SequentialSimulationConfig xmlns="http://www.openda.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.openda.org http://schemas.openda.org/algorithm/sequentialSimulation.xsd">
+
+<analysisTimes type="fixed" skipAtInitialTime="true" skipAtFinalTime="true">201801010000,201801020000,...,201901010000</analysisTimes>
+    <!-- selection to add noise to a model. This should probably be false unless you are generating data for a twin-experpiment -->
+   <mainModel stochParameter="false" stochForcing="true" stochInit="false"/>
+</SequentialSimulationConfig>
