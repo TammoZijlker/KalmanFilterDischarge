@@ -11,3 +11,7 @@ openda_logfile.txt
 
 #Ignore kalman filter gainfile
 **/kgStorage_**
+
+#Ignore in and out files on H6
+*.e*
+*.o*
