@@ -8,3 +8,6 @@ Experiment_Outputs/**
 
 #Ignore openda logfile
 openda_logfile.txt
+
+#Ignore kalman filter gainfile
+**/kgStorage_**
