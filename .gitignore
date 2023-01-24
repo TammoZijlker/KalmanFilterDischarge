@@ -13,5 +13,5 @@ openda_logfile.txt
 **/kgStorage_**
 
 #Ignore in and out files on H6
-*.e*
-*.o*
+*Discharge.e*
+*Discharge.o*
