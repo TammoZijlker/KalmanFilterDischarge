@@ -10,7 +10,7 @@ Experiment_Outputs/**
 openda_logfile.txt
 
 #Ignore kalman filter gainfile
-**/kgStorage_**
+*kalmanGainStorage.nc
 
 #Ignore in and out files on H6
 *Discharge.e*
