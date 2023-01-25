@@ -60,7 +60,7 @@
             <action workingDirectory="%instanceDir%" linuxExe="%exedir%/RunPython.sh">
                 <arg>../../stochModel/%exedir%/Concatenate_Hisfiles.py</arg>
                 <arg>--input_files %outputdir%/allhisfiles/*%hisfile%</arg> <!-- hisfile to read -->
-                <arg>--output_filename %outputdir%/full_%hisfile%.nc</arg> <!-- location to copy the hisfile to -->
+                <arg>--output_filename %outputdir%/full_%hisfile%</arg> <!-- location to copy the hisfile to -->
             </action>
             <action workingDirectory="%instanceDir%" linuxExe="%exedir%/RunPython.sh">
                 <arg>../../stochModel/%exedir%/Concatenate_Hisfiles.py</arg>
